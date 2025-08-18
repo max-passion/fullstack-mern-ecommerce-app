@@ -1,14 +1,14 @@
 import React from 'react';
 import { FaTrash, FaEdit, FaCheck, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import { useDeleteUserMutation, useGetUsersQuery } from '../../slices/usersApiSlice';
-import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { useGetUsersQuery, useDeleteUserMutation } from '../../slices/usersApiSlice';
 
 const UserListScreen = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
-  const [deleteUser] = useDeleteUserMutation();
+  const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation();
 
   const deleteHandler = async (id) => {
     if (window.confirm('Are you sure')) {
@@ -25,51 +25,56 @@ const UserListScreen = () => {
     <div>
       <h1 className="text-2xl font-bold mb-4">Users</h1>
 
-      {isLoading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error?.data?.message || error.error}</Message>
-      ) : (
+      {(isLoading || loadingDelete) && <Loader />}
+      {error && <Message variant="danger">{error?.data?.message || error.error}</Message>}
+
+      {!isLoading && !error && users && (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200">
+          <table className="min-w-full table-auto">
             <thead>
-              <tr className="bg-gray-100 border-b">
-                <th className="px-4 py-2 text-left">ID</th>
-                <th className="px-4 py-2 text-left">NAME</th>
-                <th className="px-4 py-2 text-left">EMAIL</th>
-                <th className="px-4 py-2 text-left">ADMIN</th>
-                <th className="px-4 py-2 text-left">ACTIONS</th>
+              <tr className="bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                <th className="px-6 py-4">ID</th>
+                <th className="px-6 py-4">Name</th>
+                <th className="px-6 py-4">Email</th>
+                <th className="px-6 py-4">Admin</th>
+                <th className="px-6 py-4 text-center">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-gray-100">
               {users.map((user) => (
-                <tr key={user._id} className="border-b hover:bg-gray-50">
-                  <td className="px-4 py-2">{user._id}</td>
-                  <td className="px-4 py-2">{user.name}</td>
-                  <td className="px-4 py-2">
+                <tr key={user._id} className="hover:bg-gray-50 transition">
+                  <td className="px-6 py-4 font-mono text-sm text-gray-700 truncate max-w-[160px]">
+                    {user._id}
+                  </td>
+                  <td className="px-6 py-4 font-medium text-gray-900">{user.name}</td>
+                  <td className="px-6 py-4 text-gray-700">
                     <a href={`mailto:${user.email}`} className="text-blue-600 hover:underline">
                       {user.email}
                     </a>
                   </td>
-                  <td className="px-4 py-2">
+                  <td className="px-6 py-4">
                     {user.isAdmin ? (
-                      <FaCheck className="text-green-500" />
+                      <span className="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-200">
+                        <FaCheck className="mr-1" /> Admin
+                      </span>
                     ) : (
-                      <FaTimes className="text-red-500" />
+                      <span className="inline-flex items-center rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-600 ring-1 ring-inset ring-red-200">
+                        <FaTimes className="mr-1" /> User
+                      </span>
                     )}
                   </td>
-                  <td className="px-4 py-2 flex items-center space-x-2">
+                  <td className="px-6 py-4 flex justify-center gap-3">
                     {!user.isAdmin && (
                       <>
                         <Link
                           to={`/admin/user/${user._id}/edit`}
-                          className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
+                          className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition"
                         >
                           <FaEdit />
                         </Link>
                         <button
                           onClick={() => deleteHandler(user._id)}
-                          className="px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded"
+                          className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-red-50 text-red-600 hover:bg-red-100 transition"
                         >
                           <FaTrash />
                         </button>
