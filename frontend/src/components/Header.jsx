@@ -33,9 +33,9 @@ const Header = () => {
         <div className="container mx-auto flex items-center justify-between px-6 py-3 md:py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <img src={logo} alt="ProShop" className="h-10 w-10 rounded-full" />
+            {/* <img src={logo} alt="ProShop" className="h-10 w-10 rounded-full" /> */}
             <span className="font-bold text-2xl text-gray-800 tracking-tight">
-              ProShop
+              VibeShop
             </span>
           </Link>
 

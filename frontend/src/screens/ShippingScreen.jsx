@@ -23,71 +23,96 @@ const ShippingScreen = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
-      <CheckoutSteps step1 step2 />
-      <h1 className="text-2xl font-bold mb-6 text-center">Shipping</h1>
-
-      <form onSubmit={submitHandler} className="space-y-4">
-        {/* Address */}
-        <div>
-          <label className="block text-sm font-medium mb-1">Address</label>
-          <input
-            type="text"
-            placeholder="Enter address"
-            value={address}
-            required
-            onChange={(e) => setAddress(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-          />
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 px-4 pb-16">
+      <div className="w-full max-w-lg bg-white shadow-lg rounded-2xl p-8 border border-gray-100">
+        {/* Checkout Steps with progress bar background */}
+        <div className="mb-8">
+          <div className="relative">
+            {/* Background progress line */}
+            <div className="absolute top-5 left-0 right-0 h-1 bg-gray-200 rounded-lg"></div>
+            {/* Steps */}
+            <div className="relative z-10">
+              <CheckoutSteps step1 step2 />
+            </div>
+          </div>
         </div>
 
-        {/* City */}
-        <div>
-          <label className="block text-sm font-medium mb-1">City</label>
-          <input
-            type="text"
-            placeholder="Enter city"
-            value={city}
-            required
-            onChange={(e) => setCity(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-          />
-        </div>
+        {/* Title */}
+        <h1 className="text-3xl font-extrabold text-center text-gray-800 mb-6">
+          Shipping Information
+        </h1>
 
-        {/* Postal Code */}
-        <div>
-          <label className="block text-sm font-medium mb-1">Postal Code</label>
-          <input
-            type="text"
-            placeholder="Enter postal code"
-            value={postalCode}
-            required
-            onChange={(e) => setPostalCode(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-          />
-        </div>
+        {/* Form */}
+        <form onSubmit={submitHandler} className="space-y-5">
+          {/* Address */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              Address
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your address"
+              value={address}
+              required
+              onChange={(e) => setAddress(e.target.value)}
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-800 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            />
+          </div>
 
-        {/* Country */}
-        <div>
-          <label className="block text-sm font-medium mb-1">Country</label>
-          <input
-            type="text"
-            placeholder="Enter country"
-            value={country}
-            required
-            onChange={(e) => setCountry(e.target.value)}
-            className="w-full border rounded-lg px-3 py-2"
-          />
-        </div>
+          {/* City */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              City
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your city"
+              value={city}
+              required
+              onChange={(e) => setCity(e.target.value)}
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-800 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            />
+          </div>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition"
-        >
-          Continue
-        </button>
-      </form>
+          {/* Postal Code */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              Postal Code
+            </label>
+            <input
+              type="text"
+              placeholder="Enter postal code"
+              value={postalCode}
+              required
+              onChange={(e) => setPostalCode(e.target.value)}
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-800 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            />
+          </div>
+
+          {/* Country */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              Country
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your country"
+              value={country}
+              required
+              onChange={(e) => setCountry(e.target.value)}
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-800 shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            />
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg px-4 py-3 rounded-xl shadow-md transition-transform transform hover:scale-[1.02] focus:ring-4 focus:ring-blue-300"
+          >
+            Continue
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
