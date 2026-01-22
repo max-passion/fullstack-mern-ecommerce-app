@@ -5,6 +5,13 @@ This project is a full-stack eCommerce web application designed to provide a sea
 ---
 ![Home Page](uploads/mockup.png)
 
+## 🌐 Live Demo
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20App-success?style=for-the-badge)](https://fullstack-mern-ecommerce-app-2i1m.onrender.com/)
+
+
+
+
 ## 🚀 Features
 
 - **Authentication & Security**
