@@ -90,7 +90,7 @@ ecommerce-platform/
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/Tapubormon/fullstack-mern-ecommerce-app.git
+git clone https://github.com/enka1504/fullstack-mern-ecommerce-app.git
 cd fullstack-mern-ecommerce-app
 ```
 
