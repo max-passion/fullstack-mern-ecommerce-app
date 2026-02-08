@@ -14,7 +14,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
     throw new Error("No order items");
   } else {
     // NOTE: here we must assume that the prices from our client are incorrect.
-    // We must only trust the price of the item as it exists in
     // our DB. This prevents a user paying whatever they want by hacking our client
     // side code - https://gist.github.com/bushblade/725780e6043eaf59415fbaf6ca7376ff
 
